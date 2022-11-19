@@ -4,7 +4,9 @@
  * https://github.com/jdan/98.css/blob/main/LICENSE
  */
 
-:root {
+:root,
+::before,
+::after {
   /* Color */
   --text-color: #222222;
   --surface: #c0c0c0;
@@ -29,19 +31,19 @@
   --range-spacing: 10px;
 
   /* Some detailed computations for radio buttons and checkboxes */
-  --radio-total-width-precalc: var(--radio-width) + var(--radio-label-spacing);
+  --radio-total-width-precalc: (var(--radio-width) + var(--radio-label-spacing));
   --radio-total-width: calc(var(--radio-total-width-precalc));
   --radio-left: calc(-1 * var(--radio-total-width-precalc));
   --radio-dot-width: 4px;
-  --radio-dot-top: calc(var(--radio-width) / 2 - var(--radio-dot-width) / 2);
+  --radio-dot-top: calc((var(--radio-width) - var(--radio-dot-width)) / 2);
   --radio-dot-left: calc(
     -1 * (var(--radio-total-width-precalc)) + var(--radio-width) / 2 - var(
         --radio-dot-width
       ) / 2
   );
 
-  --checkbox-total-width-precalc: var(--checkbox-width) +
-    var(--radio-label-spacing);
+  --checkbox-total-width-precalc: (var(--checkbox-width) +
+    var(--radio-label-spacing));
   --checkbox-total-width: calc(var(--checkbox-total-width-precalc));
   --checkbox-left: calc(-1 * var(--checkbox-total-width-precalc));
   --checkmark-width: 7px;
@@ -49,11 +51,93 @@
   --checkmark-left: 3px;
 
   /* Borders */
-  --border-button-raised: svg-load("./icon/border-button-raised.svg");
-  --border-button-sunken: svg-load("./icon/border-button-sunken.svg");
-  --border-table-header-sunken: svg-load("./icon/border-table-header-sunken.svg");
-  --border-raised: svg-load("./icon/border-raised.svg");
-  --border-sunken: svg-load("./icon/border-sunken.svg");
+  @svg-load border-button-raised url("./icon/border.svg") {
+    .a { fill: #fff; }
+    .b { fill: #dfdfdf; }
+    .c { fill: #0a0a0a; }
+    .d { fill: #808080; }
+  }
+  --border-button-raised: svg-inline(border-button-raised);
+  @svg-load border-button-sunken url("./icon/border.svg") {
+    .a { fill: #0a0a0a; }
+    .b { fill: #808080; }
+    .c { fill: #fff; }
+    .d { fill: #dfdfdf; }
+  }
+  --border-button-sunken: svg-inline(border-button-sunken);
+  @svg-load border-table-header-sunken url("./icon/border.svg") {
+    .a { fill: #808080; }
+    .b { fill: #c0c0c0; }
+    .c { fill: #808080; }
+    .d { fill: #c0c0c0; }
+  }
+  --border-table-header-sunken: svg-inline(border-table-header-sunken);
+  @svg-load border-raised url("./icon/border.svg") {
+    .a { fill: #dfdfdf; }
+    .b { fill: #fff; }
+    .c { fill: #0a0a0a; }
+    .d { fill: #808080; }
+  }
+  --border-raised: svg-inline(border-raised);
+  @svg-load border-sunken url("./icon/border.svg") {
+    .a { fill: #808080; }
+    .b { fill: #0a0a0a; }
+    .c { fill: #fff; }
+    .d { fill: #dfdfdf; }
+  }
+  --border-sunken: svg-inline(border-sunken);
+}
+
+.theme-lilac {
+  /* Color */
+  --text-color: #000;
+  --surface: #aea8d9;
+  --button-highlight: #d8d5ec;
+  --button-face: #aea8d9;
+  --button-shadow: #000000;
+  --window-frame: #5a4eb1;
+  --dialog-blue: #5a4eb1;
+  --dialog-blue-light: #5a4eb1;
+  --dialog-gray: #808080;
+  --dialog-gray-light: #808080;
+  --link-blue: #0000ff;
+
+  /* Borders */
+  @svg-load border-button-raised url("./icon/border.svg") {
+    .a { fill: #d8d5ec; }
+    .b { fill: #aea8d9; }
+    .c { fill: #000000; }
+    .d { fill: #5a4eb1; }
+  }
+  --border-button-raised: svg-inline(border-button-raised);
+  @svg-load border-button-sunken url("./icon/border.svg") {
+    .a { fill: #000000; }
+    .b { fill: #5a4eb1; }
+    .c { fill: #d8d5ec; }
+    .d { fill: #aea8d9; }
+  }
+  --border-button-sunken: svg-inline(border-button-sunken);
+  @svg-load border-table-header-sunken url("./icon/border.svg") {
+    .a { fill: #5a4eb1; }
+    .b { fill: #aea8d9; }
+    .c { fill: #5a4eb1; }
+    .d { fill: #aea8d9; }
+  }
+  --border-table-header-sunken: svg-inline(border-table-header-sunken);
+  @svg-load border-raised url("./icon/border.svg") {
+    .a { fill: #aea8d9; }
+    .b { fill: #d8d5ec; }
+    .c { fill: #000000; }
+    .d { fill: #5a4eb1; }
+  }
+  --border-raised: svg-inline(border-raised);
+  @svg-load border-sunken url("./icon/border.svg") {
+    .a { fill: #5a4eb1; }
+    .b { fill: #000000; }
+    .c { fill: #d8d5ec; }
+    .d { fill: #aea8d9; }
+  }
+  --border-sunken: svg-inline(border-sunken);
 }
 
 @font-face {
@@ -276,7 +360,7 @@ input[type="reset"]:disabled,
 
 fieldset {
   border-image: svg-load("./icon/groupbox-border.svg") 2;
-  padding: calc(2 + var(--element-spacing));
+  padding: calc(2px + var(--element-spacing));
   padding-block-start: var(--element-spacing);
   margin: 0;
 }
@@ -386,7 +470,7 @@ input[type="checkbox"] + label::before {
   display: inline-block;
   width: var(--checkbox-width);
   height: var(--checkbox-width);
-  background: var(--button-highlight);
+  background: #fff;
   box-sizing: border-box;
   border: 2px solid transparent;
   border-image: var(--border-sunken) 2;
@@ -619,7 +703,7 @@ a:focus {
 
 ul.tree-view {
   display: block;
-  background: var(--button-highlight);
+  background: #fff;
   border: 2px solid transparent;
   border-image: var(--border-sunken) 2;
   padding: 4px;
@@ -674,7 +758,7 @@ ul.tree-view ul > li:last-child::after {
   top: 7px;
   bottom: 0px;
   width: 8px;
-  background: var(--button-highlight);
+  background: #fff;
 }
 
 ul.tree-view details {
@@ -716,7 +800,7 @@ ul.tree-view details > summary::-webkit-details-marker {
 
 pre {
   display: block;
-  background: var(--button-highlight);
+  background: #fff;
   border: 2px solid transparent;
   border-image: var(--border-sunken) 2;
   padding: 10px 6px;
