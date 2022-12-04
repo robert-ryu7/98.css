@@ -177,7 +177,7 @@ input[type="reset"]:disabled,
   border: 2px solid transparent;
   border-image: var(--border-raised) 2;
   background: var(--surface);
-  padding: 1px;
+  padding: 2px;
 }
 
 .title-bar {
